@@ -22,7 +22,7 @@ from pyrogram.errors import FloodWait
 from ethon.pyfunc import video_metadata
 from ethon.telefunc import force_sub
 
-ft = f"To use this bot you've to join @{fs}."
+ft = f"मालिक यह BOT USE करने के लिए यह चैनल ज्वाइन कर लो @{fs}."
 
 batch = []
 
@@ -45,7 +45,7 @@ async def _batch(event):
         return await event.reply("You've already started one batch, wait for it to complete you dumbfuck owner!")
     async with Drone.conversation(event.chat_id) as conv: 
         if s != True:
-            await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
+            await conv.send_message("मलिक जहां से वीडियो निकालना है उसका लिंक भेज दो", buttons=Button.force_reply())
             try:
                 link = await conv.get_reply()
                 try:
@@ -57,7 +57,7 @@ async def _batch(event):
                 print(e)
                 await conv.send_message("Cannot wait more longer for your response!")
                 return conv.cancel()
-            await conv.send_message("Send me the number of files/range you want to save from the given message, as a reply to this message.", buttons=Button.force_reply())
+            await conv.send_message("मालिक बताओ कितना वीडियो भेजना है", buttons=Button.force_reply())
             try:
                 _range = await conv.get_reply()
             except Exception as e:
@@ -67,7 +67,7 @@ async def _batch(event):
             try:
                 value = int(_range.text)
                 if value > 100:
-                    await conv.send_message("You can only get upto 100 files in a single batch.")
+                    await conv.send_message("मालिक आप CHUTIYA हो क्या? एक बार में 100 मैसेज ही निकल पाऊंगा")
                     return conv.cancel()
             except ValueError:
                 await conv.send_message("Range must be an integer!")
@@ -93,11 +93,11 @@ async def run_batch(userbot, client, sender, link, _range):
                 timer = 3
         try: 
             if not sender in batch:
-                await client.send_message(sender, "Batch completed.")
+                await client.send_message(sender, "सब वीडियो निकाल दिया मालिक 😍")
                 break
         except Exception as e:
             print(e)
-            await client.send_message(sender, "Batch completed.")
+            await client.send_message(sender, "सब वीडियो निकाल दिया मालिक 😍")
             break
         try:
             await get_bulk_msg(userbot, client, sender, link, i) 
